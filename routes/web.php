@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\AdminController;
 use App\Http\Controllers\Dashboard\ClassController;
+use App\Http\Controllers\Dashboard\DistributionController;
 use App\Http\Controllers\Dashboard\PermissionController;
 use App\Http\Controllers\Dashboard\RolesController;
 use App\Http\Controllers\Dashboard\SemseterController;
@@ -132,6 +133,20 @@ Route::group(['middleware'=>'auth','prefix'=>'dashboard'],function(){
         Route::post('update/{id}','update')->name($route.'update');
     });
 
+
+    
+
+    Route::group(['controller'=>DistributionController::class,'prefix'=>'distribution'], function (){
+        $route = 'dashboard.distribution.';
+        Route::get('index','index')->name($route.'index');
+        Route::get('data','data')->name($route.'data');
+        Route::get('create','create')->name($route.'create');
+        Route::get('edit/{id}','edit')->name($route.'edit');
+        Route::get('delete/{id}','delete')->name($route.'delete');
+        Route::post('store','store')->name($route.'store');
+        Route::post('update/{id}','update')->name($route.'update');
+       
+    });
 
 
 
