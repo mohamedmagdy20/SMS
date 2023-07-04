@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\ClassController;
 use App\Http\Controllers\Dashboard\PermissionController;
 use App\Http\Controllers\Dashboard\RolesController;
 use App\Http\Controllers\Dashboard\SemseterController;
+use App\Http\Controllers\Dashboard\StudentController;
 use App\Http\Controllers\Dashboard\SubjectController;
 use App\Http\Controllers\Dashboard\TeacherController;
 use Illuminate\Support\Facades\Route;
@@ -117,6 +118,18 @@ Route::group(['middleware'=>'auth','prefix'=>'dashboard'],function(){
         Route::post('store','store')->name($route.'store');
         Route::post('update/{id}','update')->name($route.'update');
        
+    });
+
+
+    Route::group(['controller'=>StudentController::class,'prefix'=>'students'], function (){
+        $route = 'dashboard.students.';
+        Route::get('index','index')->name($route.'index');
+        Route::get('data','data')->name($route.'data');
+        Route::get('create','create')->name($route.'create');
+        Route::get('edit/{id}','edit')->name($route.'edit');
+        Route::get('delete/{id}','delete')->name($route.'delete');
+        Route::post('store','store')->name($route.'store');
+        Route::post('update/{id}','update')->name($route.'update');
     });
 
 

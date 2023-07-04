@@ -53,17 +53,11 @@ class User extends Authenticatable
         });
     }
 
-    // public function scopeSuperAdmin($query)
-    // {
-    //     $query->whereHas('roles',function($query){
-    //         $query->where('name', 'super_admin');
-    //     });
-    // }
 
     public function scopeAdmin($query)
     {
         $query->whereHas('roles',function($query){
-            $query->where('name', 'admin')->Orwhere('name', 'super_admin');
+            $query->whereIn('name',['admin','super_admin']);
         });
     }
 
@@ -72,5 +66,16 @@ class User extends Authenticatable
         $query->whereHas('roles',function($query){
             $query->where('name', 'student');
         });
+    }
+
+    public function teacherData()
+    {
+        return $this->hasOne(TeacherData::class,'user_id');
+    }
+
+
+    public function studentData()
+    {
+        return $this->hasOne(StudentData::class,'user_id');
     }
 }

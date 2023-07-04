@@ -26,8 +26,8 @@ class TeacherRequest extends FormRequest
         return [
             //
             'name'=>'required',
-            'email'=>'required|email|unique:users,email,'.$this->user->id,
-            'phone'=>'required|unique:users,phone,'.$this->user->id,
+            'email'=>'required|email|unique:users,email,'.$this->user,
+            'phone'=>'required|unique:users,phone,'.$this->user,
             'password'=>'required|confirmed',
             'image'=>'image',
             'address'=>'required',

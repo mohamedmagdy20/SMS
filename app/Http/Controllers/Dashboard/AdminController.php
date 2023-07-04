@@ -31,7 +31,7 @@ class AdminController extends BaseController
 
     public function create()
     {
-        $role = $this->role->all();
+        $role = $this->role->whereIn('name',['super_admin','admin'])->get();
         return view($this->viewPath($this->bath.'create'),['role'=>$role]);
     }
 

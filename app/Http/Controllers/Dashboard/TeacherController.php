@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Teacher\TeacherRequest;
 use App\Models\TeacherData;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
-class TeacherController extends Controller
+class TeacherController extends BaseController
 {
     //
     protected $model;
     protected $data;
-    public $bath = 'dashboard.teachers.';
+    public $bath = 'teachers.';
    
     public function __construct(User $model, TeacherData $data )
     {
@@ -24,6 +26,7 @@ class TeacherController extends Controller
 
     public function index()
     {
+        
         return view($this->viewPath($this->bath.'index'));
     }
 
@@ -35,15 +38,21 @@ class TeacherController extends Controller
     public function edit($id)
     {
         $data = $this->findData($id);
-        return view($this->viewPath($this->bath.'create'),['data'=>$data]);
+        return view($this->viewPath($this->bath.'edit'),['data'=>$data]);
     }
 
 
     public function delete($id)
     {
         $data = $this->findData($id);
+        // delete image 
+        if($data->image != null)
+        {
+            $this->updateImage(null,$data->image,config('path.TEACHER_PATH'));
+        }
         $data->delete();
-        return redirect()->back()->with('success','Deleted');
+        return response()->json(['status'=>true]);
+
     }
 
 
@@ -56,7 +65,9 @@ class TeacherController extends Controller
         }
         
         $user =  $this->model->create($data);
-        $this->data->create(array_merge($data,['user_id'=>$user->id]));
+        $this->data->create(array_merge($data,['user_id'=>$user->id,'password'=>Hash::make($data['password'])]));
+
+        $user->attachRole('teacher');
         
         
 
@@ -80,7 +91,7 @@ class TeacherController extends Controller
 
     public function data()
     {
-        $data = $this->getQuery();
+        $data = $this->model->teacher()->with('teacherData')->latest();
         return DataTables::of($data)
         ->editColumn('image',function($data)
         {

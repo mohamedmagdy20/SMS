@@ -35,11 +35,32 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/css/toastr.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{asset('assets/plugins/datatables/datatables.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.3/viewer.min.css" integrity="sha512-zdX1vpRJc7+VHCUJcExqoI7yuYbSFAbSWxscAoLF0KoUPvMSAK09BaOZ47UFdP4ABSXpevKfcD0MTVxvh0jLHQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.6/css/buttons.bootstrap.min.css">
+    <style>
+      #img-preview {
+        display: none; 
+        width: 155px;   
+        border: 2px dashed #333;  
+        margin-bottom: 20px;
+      }
+      .image-show{
+        width: 155px;   
+        border: 2px dashed #333;  
+        margin-bottom: 20px;
+      }
+      #img-preview img {  
+        width: 100%;
+        height: auto; 
+        display: block;   
+      }
+    </style>
     @yield('css')
+
+
   </head>
   <body class="skin-blue sidebar-mini">
     <div class="wrapper">
@@ -104,6 +125,7 @@
     <script src="{{asset('assets/dist/js/pages/dashboard.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     {{-- <script src="{{dist/js/demo.js}}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.1/viewer.min.js"></script>
 
     <script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/plugins/datatables/datatables.min.js')}}"></script>
@@ -128,6 +150,32 @@
              console.log(toastr);
          });
      </script>
+
+    <script>
+      const chooseFile = document.getElementById("choose-file");
+      const imgPreview = document.getElementById("img-preview");
+      chooseFile.addEventListener("change", function () {
+        getImgData();
+      });
+    
+      function getImgData() {
+        const files = chooseFile.files[0];
+        if (files) {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(files);
+          fileReader.addEventListener("load", function () {
+            imgPreview.style.display = "block";
+            imgPreview.innerHTML = '<img src="' + this.result + '" />';
+          });    
+        }
+      }
+
+      
+      function viewImg(img)
+      {
+          new Viewer(img);
+      }
+    </script>
  
 
 
