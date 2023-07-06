@@ -25,6 +25,7 @@ class SemseterRequest extends FormRequest
     {
         return [
             'name'=>'required|unique:semesters,name',
+            'hour'=>'required|numeric',
             'note'=>'nullable'
         ];
     }

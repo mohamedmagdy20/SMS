@@ -65,6 +65,7 @@
         <li><a href="{{route('dashboard.teachers.index')}}"><i class="fa fa-users"></i> المعلمين</a></li>
 
         <li><a href="{{route('dashboard.students.index')}}"><i class="fa fa-users"></i> الطلاب</a></li>
+        <li><a href="{{route('dashboard.distribution.index')}}"><i class="fa fa-users"></i> توزيع المواد</a></li>
 
 
       

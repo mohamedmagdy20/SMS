@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="{{asset('assets/plugins/daterangepicker/daterangepicker-bs3.css') }}">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{asset('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+    {{-- Select 2  --}}
+    <link rel="stylesheet" href="{{asset('assets/plugins/select2/select2.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('assets/dist/fonts/fonts-fa.css')}}">
     <link rel="stylesheet" href="{{asset('assets/dist/css/bootstrap-rtl.min.css')}}">
@@ -139,6 +141,7 @@
      <script src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script> 
 
      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>
+     <script src="{{asset('assets/plugins/select2/select2.min.js')}}"></script>
      <script>
          $(document).ready(function() {
              toastr.options.timeOut = 10000;
@@ -152,6 +155,10 @@
      </script>
 
     <script>
+      $(function () {
+        //Initialize Select2 Elements
+        $(".select2").select2();
+      });
       const chooseFile = document.getElementById("choose-file");
       const imgPreview = document.getElementById("img-preview");
       chooseFile.addEventListener("change", function () {

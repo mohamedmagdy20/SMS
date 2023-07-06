@@ -71,7 +71,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>الجنسيه</label>
-                    <select name="gender" class="form-control select2 select2-hidden-accessible">
+                    <select name="gender" class="form-control select2 select2-hidden-accessible" style="width: 100%">
                         <option value="male">ذكر</option>
                         <option value="female">انثي</option>
                     </select>
@@ -86,7 +86,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>الفصل الدراسي</label>
-                    <select name="semester_id" class="form-control select2 select2-hidden-accessible" id="semester_id">
+                    <select name="semester_id" class="form-control select2 select2-hidden-accessible" style="width: 100%" id="semester_id">
                         @foreach ($semeters as $semeter )
                             <option value="{{old('semester_id',$semeter->id) }}" >{{$semeter->name}}</option>
                         @endforeach
@@ -100,7 +100,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>الغرف الدراسي</label>
-                    <select name="class_id" class="form-control select2 select2-hidden-accessible" id="class_id">
+                    <select name="class_id" class="form-control select2 select2-hidden-accessible" style="width: 100%" id="class_id">
                         @foreach ($classes as $class )
                             <option value="{{old('class_id',$class->id) }}" >{{$class->name}}</option>
                         @endforeach
@@ -113,7 +113,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>رقم الهاتف</label>
-                    <input type="text"  name="phone" class="form-control" placeholder="Enter ..." >
+                    <input type="text"  name="phone" class="form-control" style="width: 100%" placeholder="Enter ..." >
                   </div>
                   @error('phone')
                   <span style="color:red;">{{$message}}</span>

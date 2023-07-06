@@ -12,6 +12,7 @@ class Semester extends Model
     protected $table='semesters';
     protected $fillable = [
         'name',
+        'hour',
         'note'
     ];
 }

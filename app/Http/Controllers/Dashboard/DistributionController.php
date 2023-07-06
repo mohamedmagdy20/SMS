@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Distribution\DistributionRequest;
 use App\Models\Classes;
 use App\Models\Days;
 use App\Models\Distribution;
 use App\Models\Semester;
+use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class DistributionController extends Controller
+class DistributionController extends BaseController
 {
     //
     protected $model;
@@ -33,11 +35,12 @@ class DistributionController extends Controller
     {
         $semester = Semester::all();
         $classes = Classes::all();
-        $days = Days::all();
-        $user = User::all();
-        
-        return view($this->viewPath($this->bath.'create'),['semesters'=>$semester,'classes'=>$classes,'days'=>$days,'users'=>$user]);
+        $user = User::teacher()->get(); 
+        $subjects = Subject::all();
+        return view($this->viewPath($this->bath.'create'),['subjects'=>$subjects,'semesters'=>$semester,'classes'=>$classes,'users'=>$user]);
     }
+
+    
 
     public function edit($id)
     {
@@ -61,9 +64,10 @@ class DistributionController extends Controller
     }
 
 
-    public function store(DistributionRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
+        // $data = $request->validated();
+        return $request->all();
         
         $class =  $this->model->create($data);
         return redirect()->back()->with('success','تمت الاضافه');
@@ -80,9 +84,8 @@ class DistributionController extends Controller
 
     public function data()
     {
-        $data = $this->model->with('semester')->with('classes')->with('days')->with('subject')->latest();
+        $data = $this->model->with('user')->with('semester')->with('classes')->with('days')->with('subject')->latest();
         return DataTables::of($data)
-       
         ->addColumn('actions',function($data)
         {
             return view($this->viewPath($this->bath.'action'),['data'=>$data,'type'=>'actions']);

@@ -26,11 +26,11 @@ class DistributionRequest extends FormRequest
         return [
             //
             'user_id'=>'required',
-            'subject_id'=>'required',
+            'subject_id'=>'required|array',
             'semester_id'=>'required',
-            'class_id'=>'required',
-            'day_id'=>'required',
-            'time'=>'required'
+            'class_id'=>'required|array',
+            'day_id'=>'required|array',
+            'time'=>'required|array'
         ];
     }
 }

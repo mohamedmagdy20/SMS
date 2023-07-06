@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Teacher;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class TeacherRequest extends FormRequest
 {
@@ -26,8 +27,8 @@ class TeacherRequest extends FormRequest
         return [
             //
             'name'=>'required',
-            'email'=>'required|email|unique:users,email,'.$this->user,
-            'phone'=>'required|unique:users,phone,'.$this->user,
+            'email'=>['required', Rule::unique('users','email')->ignore($this->route('id'))],
+            'phone'=>['required', Rule::unique('users','phone')->ignore($this->route('id'))],
             'password'=>'required|confirmed',
             'image'=>'image',
             'address'=>'required',

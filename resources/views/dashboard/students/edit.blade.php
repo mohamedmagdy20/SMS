@@ -71,7 +71,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>الجنسيه</label>
-                    <select name="gender" class="form-control select2 select2-hidden-accessible">
+                    <select name="gender" class="form-control select2 select2-hidden-accessible" style="width: 100%" >
                         <option value="male" {{$data->studentData->gender == 'male' ? 'selected' : ''}}>ذكر</option>
                         <option value="female" {{$data->studentData->gender == 'female' ? 'selected' : ''}}>انثي</option>
                     </select>
@@ -86,7 +86,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>الفصل الدراسي</label>
-                    <select name="semester_id" class="form-control select2 select2-hidden-accessible" id="semester_id">
+                    <select name="semester_id" class="form-control select2 select2-hidden-accessible" style="width: 100%"  id="semester_id">
                         @foreach ($semeters as $semeter )
                             <option value="{{old('semester_id',$semeter->id) }}" {{$data->studentData->semester_id == $semeter->id ? 'selected' : ''}} >{{$semeter->name}}</option>
                         @endforeach
@@ -100,7 +100,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>الغرف الدراسي</label>
-                    <select name="class_id" class="form-control select2 select2-hidden-accessible" id="class_id">
+                    <select name="class_id" class="form-control select2 select2-hidden-accessible" style="width: 100%" id="class_id">
                         @foreach ($classes as $class )
                             <option value="{{old('class_id',$class->id) }}"   {{$data->studentData->semester_id == $semeter->id ? 'selected' : ''}} >{{$class->name}}</option>
                         @endforeach

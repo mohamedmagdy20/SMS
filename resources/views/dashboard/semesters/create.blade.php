@@ -33,6 +33,18 @@
                       
                   @enderror
             </div>  
+
+            
+            <div class="col-md-12">
+              <div class="form-group">
+                  <label>عدد الساعات كل حصه </label>
+                  <input type="text" name="hour" class="form-control" placeholder="Enter ...">
+                </div>
+                @error('hour')
+                <span style="color:red;">{{$message}}</span>
+                    
+                @enderror
+          </div>  
             <div class="col-md-12">
                 <div class="form-group">
                     <label>ملاحظات</label>
